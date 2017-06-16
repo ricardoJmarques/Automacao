@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Automacao Casa</title>
+</head>
+<script language="javascript">
+var m_XML = false;
+
+function ProcessResponse()
+{
+	if (m_XML.readyState == 4)
+	{
+		if (m_XML.status == 200) 
+		{			
+		}
+	}
+}
+
+function Doxml(canal,numero,grupo,funcao)
+{
+	try
+	{
+		if (! m_XML)
+		{
+			if (window.XMLHttpRequest)
+			{
+				m_XML = new XMLHttpRequest();
+			}
+			else if (window.ActiveXObject) 
+			{
+				m_XML = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}		
+
+		if (m_XML)
+		{
+			m_XML.open("GET","cgi-bin/automacao.cgi?"+canal+"&"+numero+"&"+grupo+"&"+funcao);
+			m_XML.onreadystatechange = ProcessResponse ;
+			m_XML.send(null);
+		}
+	}
+	catch (e)
+	{
+	}
+}
+
+function getUrlVars() {
+    var map = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    map[key] = value;
+    });
+    return map;
+    }
+
+function Dados(numero, funcao)
+{  
+	var grupo = formGrupo.selectGrupo.value;
+    var canal = getUrlVars()["id"];
+    Doxml(canal, numero, grupo, funcao);  
+} 
+
+</script>
+
+
+<body>
+<table style="background-color:CCCCCC" border="0" width="300" height="440" cellpadding="0" cellspacing="0" align="center">
+	<tr>
+		<td colspan="3" align="center">Divisao</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"></td>
+	</tr>
+	<tr>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('1','on')" value="ON"></td>
+		<td width="40" align="center">1</td>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('1','off')" value="OFF"></td>
+	</tr>
+	<tr>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('2','on')" value="ON"></td>
+		<td width="40" align="center">2</td>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('2','off')" value="OFF"></td>
+	</tr>
+	<tr>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('3','on')" value="ON"></td>
+		<td width="40" align="center">3</td>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('3','off')" value="OFF"></td>
+	</tr>
+	<tr>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('4','on')" value="ON"></td>
+		<td width="40" align="center">4</td>
+		<td width="130" align="center"><input style="width:100" type="button" onclick="Dados('4','off')" value="OFF"></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center">Grupo</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center">
+		  <form name="formGrupo">
+		    <select style="width:200;text-align:center" name="selectGrupo">
+		      <option value="1">I</option>
+		      <option value="2">II</option>
+			  <option value="3">III</option>
+			  <option value="4">IV</option>
+		    </select> 
+  		  </form>
+	    </td>
+	</tr>
+</table>
+</body>
+</html>
