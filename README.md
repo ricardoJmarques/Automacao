@@ -1,5 +1,5 @@
 # Automacao
-Projeto de Automação residencial
+Projeto de Automação residencial baseada no Raspberry PI Modelo 1 versão B, B+
 
 Projecto desenvolvido durante o verão de 2013 para atualizar o sistema de automação residencial existente em minha casa.
 
